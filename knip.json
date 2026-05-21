@@ -1,0 +1,4 @@
+{
+  "project": ["**/*.{ts,tsx}"],
+  "ignoreDependencies": ["expo-updates", "expo-system-ui"]
+}
