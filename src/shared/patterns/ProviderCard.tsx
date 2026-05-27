@@ -1,20 +1,22 @@
-import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { colors, spacing, typography } from '#shared/foundations';
 import { Typography } from '#shared/elements';
 
 type ProviderCardProps = {
+  id: string;
   name: string;
   rating: number;
+  isFavorite: boolean;
+  onToggleFavorite: (id: string) => void;
 };
 
-export default function ProviderCard({ name, rating }: ProviderCardProps) {
-  const [isFavorite, setIsFavorite] = useState(false);
-
-  const toggleFavorite = () => {
-    setIsFavorite((prev) => !prev);
-  };
-
+export default function ProviderCard({
+  id,
+  name,
+  rating,
+  isFavorite,
+  onToggleFavorite,
+}: ProviderCardProps) {
   return (
     <View style={styles.card}>
       <View style={styles.info}>
@@ -23,7 +25,7 @@ export default function ProviderCard({ name, rating }: ProviderCardProps) {
           Rating: {rating.toFixed(1)} ★
         </Typography>
       </View>
-      <Pressable style={styles.favoriteButton} onPress={toggleFavorite}>
+      <Pressable style={styles.favoriteButton} onPress={() => onToggleFavorite(id)}>
         <Text style={styles.favoriteText}>{isFavorite ? '♥' : '♡'}</Text>
       </Pressable>
     </View>

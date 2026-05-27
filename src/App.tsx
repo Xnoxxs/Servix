@@ -1,18 +1,53 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import HomeScreen from '#features/home/screens/HomeScreen';
+import FavoritesScreen from '#features/favorites/screens/FavoritesScreen';
+import { useFavorites } from '#features/home/hooks/useFavorites';
+import { colors } from '#shared/foundations';
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
+  // useFavorites lives here so both tabs share the same favorites state.
+  const { isFavorite, toggleFavorite } = useFavorites();
+
   return (
-    <View style={styles.container}>
-      <HomeScreen />
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Tab.Navigator
+          screenOptions={{
+            headerShown: false,
+            tabBarActiveTintColor: colors.primary,
+            tabBarInactiveTintColor: colors.textMuted,
+          }}
+        >
+          <Tab.Screen
+            name="Home"
+            options={{
+              tabBarIcon: ({ color }) => (
+                <Text style={{ color, fontSize: 20 }}>🏠</Text>
+              ),
+            }}
+          >
+            {() => <HomeScreen isFavorite={isFavorite} toggleFavorite={toggleFavorite} />}
+          </Tab.Screen>
+
+          <Tab.Screen
+            name="Favorites"
+            options={{
+              tabBarIcon: ({ color }) => (
+                <Text style={{ color, fontSize: 20 }}>♥</Text>
+              ),
+            }}
+          >
+            {() => <FavoritesScreen isFavorite={isFavorite} toggleFavorite={toggleFavorite} />}
+          </Tab.Screen>
+        </Tab.Navigator>
+      </NavigationContainer>
       <StatusBar style="light" />
-    </View>
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

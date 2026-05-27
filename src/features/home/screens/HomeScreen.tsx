@@ -5,7 +5,12 @@ import { ScreenContainer, Typography } from '#shared/elements';
 import { CategorySection, HeaderSection, ProviderCard } from '#shared/patterns';
 import { categories, providers } from '../data/homeData';
 
-export default function HomeScreen() {
+type HomeScreenProps = {
+  isFavorite: (id: string) => boolean;
+  toggleFavorite: (id: string) => void;
+};
+
+export default function HomeScreen({ isFavorite, toggleFavorite }: HomeScreenProps) {
   useEffect(() => {
     console.log('Servix app loaded');
   }, []);
@@ -24,8 +29,11 @@ export default function HomeScreen() {
           {providers.map((provider) => (
             <ProviderCard
               key={provider.id}
+              id={provider.id}
               name={provider.name}
               rating={provider.rating}
+              isFavorite={isFavorite(provider.id)}
+              onToggleFavorite={toggleFavorite}
             />
           ))}
         </View>
