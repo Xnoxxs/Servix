@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { colors, spacing, typography } from '#shared/foundations';
+import { Typography } from '#shared/elements';
 
 type ProviderCardProps = {
   name: string;
@@ -16,8 +18,10 @@ export default function ProviderCard({ name, rating }: ProviderCardProps) {
   return (
     <View style={styles.card}>
       <View style={styles.info}>
-        <Text style={styles.name}>{name}</Text>
-        <Text style={styles.rating}>Rating: {rating.toFixed(1)} ★</Text>
+        <Typography variant="label">{name}</Typography>
+        <Typography variant="caption" style={{ marginTop: spacing.xs }}>
+          Rating: {rating.toFixed(1)} ★
+        </Typography>
       </View>
       <Pressable style={styles.favoriteButton} onPress={toggleFavorite}>
         <Text style={styles.favoriteText}>{isFavorite ? '♥' : '♡'}</Text>
@@ -31,31 +35,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#ffffff',
-    borderRadius: 8,
-    padding: 16,
-    marginBottom: 12,
+    backgroundColor: colors.surface,
+    borderRadius: spacing.sm,
+    padding: spacing.lg,
+    marginBottom: spacing.md,
     borderWidth: 1,
-    borderColor: '#e5e7eb',
+    borderColor: colors.border,
   },
   info: {
     flex: 1,
   },
-  name: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#1f2937',
-  },
-  rating: {
-    fontSize: 14,
-    color: '#6b7280',
-    marginTop: 4,
-  },
   favoriteButton: {
-    padding: 8,
+    padding: spacing.sm,
   },
   favoriteText: {
-    fontSize: 24,
-    color: '#ef4444',
+    fontSize: typography.xl,
+    color: colors.danger,
   },
 });

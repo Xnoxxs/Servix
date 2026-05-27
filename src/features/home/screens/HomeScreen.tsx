@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import CategoryCard from '../components/CategoryCard';
-import Header from '../components/Header';
-import ProviderCard from '../components/ProviderCard';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { spacing } from '#shared/foundations';
+import { ScreenContainer, Typography } from '#shared/elements';
+import { CategorySection, HeaderSection, ProviderCard } from '#shared/patterns';
 import { categories, providers } from '../data/homeData';
 
 export default function HomeScreen() {
@@ -11,21 +11,16 @@ export default function HomeScreen() {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Header />
+    <ScreenContainer>
+      <HeaderSection />
 
       <ScrollView style={styles.scrollView}>
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Categories</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {categories.map((category) => (
-              <CategoryCard key={category} name={category} />
-            ))}
-          </ScrollView>
-        </View>
+        <CategorySection title="Categories" categories={categories} />
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Popular Providers</Text>
+          <Typography variant="title" style={styles.sectionTitle}>
+            Popular Providers
+          </Typography>
           {providers.map((provider) => (
             <ProviderCard
               key={provider.id}
@@ -35,25 +30,18 @@ export default function HomeScreen() {
           ))}
         </View>
       </ScrollView>
-    </View>
+    </ScreenContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f9fafb',
-  },
   scrollView: {
     flex: 1,
   },
   section: {
-    padding: 16,
+    padding: spacing.lg,
   },
   sectionTitle: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: '#1f2937',
-    marginBottom: 12,
+    marginBottom: spacing.md,
   },
 });
