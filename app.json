@@ -11,6 +11,14 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Allow Servix to use your location to show nearby providers."
+        }
+      ]
+    ],
     "ios": {
       "supportsTablet": true
     },

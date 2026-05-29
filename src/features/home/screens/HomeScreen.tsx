@@ -4,6 +4,7 @@ import { spacing } from '#shared/foundations';
 import { ScreenContainer, Typography } from '#shared/elements';
 import { CategorySection, HeaderSection, ProviderCard } from '#shared/patterns';
 import { categories, providers } from '../data/homeData';
+import { useLocation } from '../hooks/useLocation';
 
 type HomeScreenProps = {
   isFavorite: (id: string) => boolean;
@@ -11,6 +12,8 @@ type HomeScreenProps = {
 };
 
 export default function HomeScreen({ isFavorite, toggleFavorite }: HomeScreenProps) {
+  const { coords, loading, error } = useLocation();
+
   useEffect(() => {
     console.log('Servix app loaded');
   }, []);
@@ -21,6 +24,21 @@ export default function HomeScreen({ isFavorite, toggleFavorite }: HomeScreenPro
 
       <ScrollView style={styles.scrollView}>
         <CategorySection title="Categories" categories={categories} />
+
+        {/* Your Location section — driven entirely by the useLocation hook */}
+        <View style={styles.section}>
+          <Typography variant="title" style={styles.sectionTitle}>
+            Your Location
+          </Typography>
+          {loading && <Typography variant="body">Fetching location…</Typography>}
+          {error && <Typography variant="body">{error}</Typography>}
+          {coords && (
+            <>
+              <Typography variant="body">Lat: {coords.latitude.toFixed(5)}</Typography>
+              <Typography variant="body">Lon: {coords.longitude.toFixed(5)}</Typography>
+            </>
+          )}
+        </View>
 
         <View style={styles.section}>
           <Typography variant="title" style={styles.sectionTitle}>
