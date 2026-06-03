@@ -1,4 +1,4 @@
-import { Platform, SafeAreaView, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
+import { FlatList, Platform, SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
 import { colors, spacing } from '#shared/foundations';
 import { ScreenContainer, Typography } from '#shared/elements';
 import { ProviderCard } from '#shared/patterns';
@@ -29,28 +29,28 @@ export default function FavoritesScreen({ isFavorite, toggleFavorite }: Favorite
         </SafeAreaView>
       </View>
 
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.list}>
-          {favorited.length === 0 ? (
-            <View style={styles.empty}>
-              <Typography variant="caption">
-                No favorites yet. Tap ♡ on a provider to save them here.
-              </Typography>
-            </View>
-          ) : (
-            favorited.map((provider) => (
-              <ProviderCard
-                key={provider.id}
-                id={provider.id}
-                name={provider.name}
-                rating={provider.rating}
-                isFavorite={isFavorite(provider.id)}
-                onToggleFavorite={toggleFavorite}
-              />
-            ))
-          )}
-        </View>
-      </ScrollView>
+      <FlatList
+        style={styles.scrollView}
+        contentContainerStyle={styles.list}
+        data={favorited}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <ProviderCard
+            id={item.id}
+            name={item.name}
+            rating={item.rating}
+            isFavorite={isFavorite(item.id)}
+            onToggleFavorite={toggleFavorite}
+          />
+        )}
+        ListEmptyComponent={
+          <View style={styles.empty}>
+            <Typography variant="caption">
+              No favorites yet. Tap ♡ on a provider to save them here.
+            </Typography>
+          </View>
+        }
+      />
     </ScreenContainer>
   );
 }

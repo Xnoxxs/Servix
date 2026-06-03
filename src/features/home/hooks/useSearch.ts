@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { providers } from '../data/homeData';
 import { getLastSearch, saveLastSearch } from '../services/searchStorage';
 import type { Provider } from '#shared/types';
 
@@ -9,7 +8,7 @@ type UseSearchResult = {
   filteredProviders: Provider[];
 };
 
-export function useSearch(): UseSearchResult {
+export function useSearch(providers: Provider[]): UseSearchResult {
   const [searchTerm, setSearchTerm] = useState('');
 
   // Tracks whether the initial load from AsyncStorage has completed.
