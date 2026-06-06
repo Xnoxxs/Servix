@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import HomeScreen from '#features/home/screens/HomeScreen';
 import FavoritesScreen from '#features/favorites/screens/FavoritesScreen';
+import RequestsScreen from '#features/requests/screens/RequestsScreen';
 import { useFavorites } from '#features/home/hooks/useFavorites';
 import { colors } from '#shared/foundations';
 
@@ -45,6 +46,14 @@ export default function App() {
           >
             {() => <FavoritesScreen isFavorite={isFavorite} toggleFavorite={toggleFavorite} />}
           </Tab.Screen>
+
+          <Tab.Screen
+            name="Requests"
+            component={RequestsScreen}
+            options={{
+              tabBarIcon: ({ color }) => <Text style={{ color, fontSize: 20 }}>R</Text>,
+            }}
+          />
         </Tab.Navigator>
       </NavigationContainer>
       <StatusBar style="light" />
