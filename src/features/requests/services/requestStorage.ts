@@ -24,7 +24,7 @@ export async function getRequests(): Promise<ServiceRequest[]> {
 
 // Writes the full request list to AsyncStorage.
 // Failures are silently swallowed so the UI is never blocked.
-export async function saveRequests(requests: ServiceRequest[]): Promise<void> {
+async function saveRequests(requests: ServiceRequest[]): Promise<void> {
   try {
     await AsyncStorage.setItem(REQUESTS_KEY, JSON.stringify(requests));
     console.log('[requestStorage] saved:', requests);
@@ -34,7 +34,9 @@ export async function saveRequests(requests: ServiceRequest[]): Promise<void> {
 }
 
 // Adds one request to the persisted list and returns the updated list.
-export async function addRequest(request: ServiceRequest): Promise<ServiceRequest[]> {
+export async function addRequest(
+  request: ServiceRequest,
+): Promise<ServiceRequest[]> {
   const requests = await getRequests();
   const updatedRequests = [request, ...requests];
 

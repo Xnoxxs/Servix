@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { moreProviders, providers } from '../data/homeData';
+import { moreProviders, providers } from '#shared/data/providers';
 import type { Provider } from '#shared/types';
 
 type UseProvidersResult = {

@@ -1,15 +1,25 @@
-import { FlatList, Platform, SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
+import {
+  FlatList,
+  Platform,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  View,
+} from 'react-native';
 import { colors, spacing } from '#shared/foundations';
 import { ScreenContainer, Typography } from '#shared/elements';
 import { ProviderCard } from '#shared/patterns';
-import { providers } from '#features/home/data/homeData';
+import { providers } from '#shared/data/providers';
 
 type FavoritesScreenProps = {
   isFavorite: (id: string) => boolean;
   toggleFavorite: (id: string) => void;
 };
 
-export default function FavoritesScreen({ isFavorite, toggleFavorite }: FavoritesScreenProps) {
+export default function FavoritesScreen({
+  isFavorite,
+  toggleFavorite,
+}: FavoritesScreenProps) {
   // Filter the full provider list down to only the ones the user has saved.
   const favorited = providers.filter((p) => isFavorite(p.id));
 

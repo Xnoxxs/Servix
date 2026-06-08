@@ -9,7 +9,9 @@ type CategoryCardProps = {
 export default function CategoryCard({ name }: CategoryCardProps) {
   return (
     <View style={styles.card}>
-      <Typography variant="body" weight="600">{name}</Typography>
+      <Typography variant="body" weight="600">
+        {name}
+      </Typography>
     </View>
   );
 }

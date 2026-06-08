@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
-import { getCurrentLocation, LocationCoords } from '../services/locationService';
+import {
+  getCurrentLocation,
+  LocationCoords,
+} from '../services/locationService';
 
 type UseLocationResult = {
   coords: LocationCoords | null;

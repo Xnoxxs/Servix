@@ -13,8 +13,12 @@ export default function HeaderSection() {
     <View style={styles.wrapper}>
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.container}>
-          <Typography variant="heading" color={colors.white}>Servix</Typography>
-          <Typography variant="body" color={colors.primaryLight}>Find local services</Typography>
+          <Typography variant="heading" color={colors.white}>
+            Servix
+          </Typography>
+          <Typography variant="body" color={colors.primaryLight}>
+            Find local services
+          </Typography>
         </View>
       </SafeAreaView>
     </View>

@@ -1,4 +1,11 @@
-import { FlatList, Platform, SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
+import {
+  FlatList,
+  Platform,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  View,
+} from 'react-native';
 import { ScreenContainer, Typography } from '#shared/elements';
 import { colors, spacing } from '#shared/foundations';
 import ServiceRequestCard from '../components/ServiceRequestCard';
@@ -42,7 +49,9 @@ export default function RequestsScreen() {
         renderItem={({ item }) => <ServiceRequestCard request={item} />}
         ListEmptyComponent={
           <View style={styles.empty}>
-            <Typography variant="caption">No service requests submitted yet.</Typography>
+            <Typography variant="caption">
+              No service requests submitted yet.
+            </Typography>
           </View>
         }
       />

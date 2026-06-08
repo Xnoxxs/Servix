@@ -8,7 +8,10 @@ type CategorySectionProps = {
   categories: string[];
 };
 
-export default function CategorySection({ title, categories }: CategorySectionProps) {
+export default function CategorySection({
+  title,
+  categories,
+}: CategorySectionProps) {
   return (
     <View style={styles.section}>
       <Typography variant="title" style={styles.sectionTitle}>

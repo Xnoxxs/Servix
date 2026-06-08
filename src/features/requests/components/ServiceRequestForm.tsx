@@ -15,7 +15,9 @@ type ServiceRequestFormProps = {
   onSubmit: (request: ServiceRequestInput) => Promise<void>;
 };
 
-export default function ServiceRequestForm({ onSubmit }: ServiceRequestFormProps) {
+export default function ServiceRequestForm({
+  onSubmit,
+}: ServiceRequestFormProps) {
   const [serviceType, setServiceType] = useState('');
   const [location, setLocation] = useState('');
   const [description, setDescription] = useState('');
@@ -79,7 +81,11 @@ export default function ServiceRequestForm({ onSubmit }: ServiceRequestFormProps
           placeholderTextColor={colors.textMuted}
         />
         {errors.serviceType && (
-          <Typography variant="caption" color={colors.danger} style={styles.message}>
+          <Typography
+            variant="caption"
+            color={colors.danger}
+            style={styles.message}
+          >
             {errors.serviceType}
           </Typography>
         )}
@@ -97,7 +103,11 @@ export default function ServiceRequestForm({ onSubmit }: ServiceRequestFormProps
           placeholderTextColor={colors.textMuted}
         />
         {errors.location && (
-          <Typography variant="caption" color={colors.danger} style={styles.message}>
+          <Typography
+            variant="caption"
+            color={colors.danger}
+            style={styles.message}
+          >
             {errors.location}
           </Typography>
         )}
@@ -117,7 +127,11 @@ export default function ServiceRequestForm({ onSubmit }: ServiceRequestFormProps
           textAlignVertical="top"
         />
         {errors.description && (
-          <Typography variant="caption" color={colors.danger} style={styles.message}>
+          <Typography
+            variant="caption"
+            color={colors.danger}
+            style={styles.message}
+          >
             {errors.description}
           </Typography>
         )}
@@ -126,7 +140,11 @@ export default function ServiceRequestForm({ onSubmit }: ServiceRequestFormProps
       <Button label="Submit Request" onPress={handleSubmit} />
 
       {successMessage && (
-        <Typography variant="caption" color={colors.primary} style={styles.successMessage}>
+        <Typography
+          variant="caption"
+          color={colors.primary}
+          style={styles.successMessage}
+        >
           {successMessage}
         </Typography>
       )}

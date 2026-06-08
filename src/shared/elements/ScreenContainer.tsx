@@ -7,7 +7,10 @@ type ScreenContainerProps = {
   style?: StyleProp<ViewStyle>;
 };
 
-export default function ScreenContainer({ children, style }: ScreenContainerProps) {
+export default function ScreenContainer({
+  children,
+  style,
+}: ScreenContainerProps) {
   return <View style={[styles.container, style]}>{children}</View>;
 }
 

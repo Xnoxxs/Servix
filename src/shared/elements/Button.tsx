@@ -9,13 +9,25 @@ type ButtonProps = {
   variant?: ButtonVariant;
 };
 
-export default function Button({ label, onPress, variant = 'primary' }: ButtonProps) {
+export default function Button({
+  label,
+  onPress,
+  variant = 'primary',
+}: ButtonProps) {
   return (
     <Pressable
-      style={[styles.base, variant === 'outline' ? styles.outline : styles.primary]}
+      style={[
+        styles.base,
+        variant === 'outline' ? styles.outline : styles.primary,
+      ]}
       onPress={onPress}
     >
-      <Text style={[styles.label, variant === 'outline' ? styles.labelOutline : styles.labelPrimary]}>
+      <Text
+        style={[
+          styles.label,
+          variant === 'outline' ? styles.labelOutline : styles.labelPrimary,
+        ]}
+      >
         {label}
       </Text>
     </Pressable>

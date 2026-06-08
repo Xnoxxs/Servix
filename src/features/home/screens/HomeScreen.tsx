@@ -3,7 +3,7 @@ import { FlatList, StyleSheet, TextInput, View } from 'react-native';
 import { spacing } from '#shared/foundations';
 import { ScreenContainer, Typography } from '#shared/elements';
 import { CategorySection, HeaderSection, ProviderCard } from '#shared/patterns';
-import { categories } from '../data/homeData';
+import { categories } from '#shared/data/providers';
 import { useLocation } from '../hooks/useLocation';
 import { useProviders } from '../hooks/useProviders';
 import { useSearch } from '../hooks/useSearch';
@@ -13,7 +13,10 @@ type HomeScreenProps = {
   toggleFavorite: (id: string) => void;
 };
 
-export default function HomeScreen({ isFavorite, toggleFavorite }: HomeScreenProps) {
+export default function HomeScreen({
+  isFavorite,
+  toggleFavorite,
+}: HomeScreenProps) {
   const { coords, loading, error } = useLocation();
   const { list, refreshing, onRefresh, onEndReached } = useProviders();
   const { searchTerm, setSearchTerm, filteredProviders } = useSearch(list);
@@ -39,8 +42,12 @@ export default function HomeScreen({ isFavorite, toggleFavorite }: HomeScreenPro
         {error && <Typography variant="body">{error}</Typography>}
         {coords && (
           <>
-            <Typography variant="body">Lat: {coords.latitude.toFixed(5)}</Typography>
-            <Typography variant="body">Lon: {coords.longitude.toFixed(5)}</Typography>
+            <Typography variant="body">
+              Lat: {coords.latitude.toFixed(5)}
+            </Typography>
+            <Typography variant="body">
+              Lon: {coords.longitude.toFixed(5)}
+            </Typography>
           </>
         )}
       </View>

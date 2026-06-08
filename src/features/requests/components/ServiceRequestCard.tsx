@@ -7,7 +7,9 @@ type ServiceRequestCardProps = {
   request: ServiceRequest;
 };
 
-export default function ServiceRequestCard({ request }: ServiceRequestCardProps) {
+export default function ServiceRequestCard({
+  request,
+}: ServiceRequestCardProps) {
   return (
     <View style={styles.card}>
       <Typography variant="label">{request.serviceType}</Typography>

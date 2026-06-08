@@ -25,13 +25,3 @@ export async function saveLastSearch(term: string): Promise<void> {
     // silently ignore write errors
   }
 }
-
-// Removes the persisted search term from AsyncStorage.
-export async function clearLastSearch(): Promise<void> {
-  try {
-    await AsyncStorage.removeItem(SEARCH_KEY);
-    console.log('[searchStorage] cleared');
-  } catch {
-    // silently ignore errors
-  }
-}

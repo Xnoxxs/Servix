@@ -25,7 +25,10 @@ export default function ProviderCard({
           Rating: {rating.toFixed(1)} ★
         </Typography>
       </View>
-      <Pressable style={styles.favoriteButton} onPress={() => onToggleFavorite(id)}>
+      <Pressable
+        style={styles.favoriteButton}
+        onPress={() => onToggleFavorite(id)}
+      >
         <Text style={styles.favoriteText}>{isFavorite ? '♥' : '♡'}</Text>
       </Pressable>
     </View>

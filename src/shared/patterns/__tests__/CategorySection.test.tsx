@@ -16,7 +16,9 @@ describe('CategorySection – smoke', () => {
   });
 
   it('displays the section title', () => {
-    render(<CategorySection title="Popular Services" categories={categories} />);
+    render(
+      <CategorySection title="Popular Services" categories={categories} />,
+    );
     expect(screen.getByText('Popular Services')).toBeTruthy();
   });
 
