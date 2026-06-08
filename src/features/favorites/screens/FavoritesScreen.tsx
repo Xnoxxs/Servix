@@ -6,20 +6,16 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
+import { useRouter } from 'expo-router';
 import { colors, spacing } from '#shared/foundations';
 import { ScreenContainer, Typography } from '#shared/elements';
-import { ProviderCard } from '#shared/patterns';
-import { providers } from '#shared/data/providers';
+import ProviderCard from '#features/providers/components/ProviderCard';
+import { providers } from '#features/providers/services/providerCatalog';
+import { useFavoritesContext } from '../context/FavoritesContext';
 
-type FavoritesScreenProps = {
-  isFavorite: (id: string) => boolean;
-  toggleFavorite: (id: string) => void;
-};
-
-export default function FavoritesScreen({
-  isFavorite,
-  toggleFavorite,
-}: FavoritesScreenProps) {
+export default function FavoritesScreen() {
+  const router = useRouter();
+  const { isFavorite, toggleFavorite } = useFavoritesContext();
   // Filter the full provider list down to only the ones the user has saved.
   const favorited = providers.filter((p) => isFavorite(p.id));
 
@@ -51,6 +47,7 @@ export default function FavoritesScreen({
             rating={item.rating}
             isFavorite={isFavorite(item.id)}
             onToggleFavorite={toggleFavorite}
+            onPress={(id) => router.push(`/providers/${id}`)}
           />
         )}
         ListEmptyComponent={

@@ -1,23 +1,23 @@
 import { useEffect } from 'react';
-import { FlatList, StyleSheet, TextInput, View } from 'react-native';
+import { FlatList, Pressable, StyleSheet, View } from 'react-native';
+import { useRouter } from 'expo-router';
 import { spacing } from '#shared/foundations';
 import { ScreenContainer, Typography } from '#shared/elements';
-import { CategorySection, HeaderSection, ProviderCard } from '#shared/patterns';
-import { categories } from '#shared/data/providers';
-import { useLocation } from '../hooks/useLocation';
-import { useProviders } from '../hooks/useProviders';
-import { useSearch } from '../hooks/useSearch';
+import { useFavoritesContext } from '#features/favorites/context/FavoritesContext';
+import LocationSection from '#features/location/components/LocationSection';
+import { useLocation } from '#features/location/hooks/useLocation';
+import ProviderCard from '#features/providers/components/ProviderCard';
+import { useProviders } from '#features/providers/hooks/useProviders';
+import { categories } from '#features/providers/services/providerCatalog';
+import SearchInput from '#features/search/components/SearchInput';
+import { useSearch } from '#features/search/hooks/useSearch';
+import CategorySection from '../components/CategorySection';
+import HeaderSection from '../components/HeaderSection';
 
-type HomeScreenProps = {
-  isFavorite: (id: string) => boolean;
-  toggleFavorite: (id: string) => void;
-};
-
-export default function HomeScreen({
-  isFavorite,
-  toggleFavorite,
-}: HomeScreenProps) {
-  const { coords, loading, error } = useLocation();
+export default function HomeScreen() {
+  const router = useRouter();
+  const { isFavorite, toggleFavorite } = useFavoritesContext();
+  const { place, loading, error } = useLocation();
   const { list, refreshing, onRefresh, onEndReached } = useProviders();
   const { searchTerm, setSearchTerm, filteredProviders } = useSearch(list);
 
@@ -34,38 +34,22 @@ export default function HomeScreen({
       <CategorySection title="Categories" categories={categories} />
 
       {/* Your Location section — driven entirely by the useLocation hook */}
-      <View style={styles.section}>
-        <Typography variant="title" style={styles.sectionTitle}>
-          Your Location
-        </Typography>
-        {loading && <Typography variant="body">Fetching location…</Typography>}
-        {error && <Typography variant="body">{error}</Typography>}
-        {coords && (
-          <>
-            <Typography variant="body">
-              Lat: {coords.latitude.toFixed(5)}
-            </Typography>
-            <Typography variant="body">
-              Lon: {coords.longitude.toFixed(5)}
-            </Typography>
-          </>
-        )}
-      </View>
+      <LocationSection place={place} loading={loading} error={error} />
 
       <View style={styles.providersHeader}>
-        <Typography variant="title" style={styles.sectionTitle}>
-          Popular Providers
-        </Typography>
+        <View style={styles.providersTitleRow}>
+          <Typography variant="title" style={styles.sectionTitle}>
+            Popular Providers
+          </Typography>
+          <Pressable onPress={() => router.push('/providers')}>
+            <Typography variant="caption" style={styles.browseAll}>
+              Browse all
+            </Typography>
+          </Pressable>
+        </View>
 
         {/* Search field — value and change handler come from useSearch */}
-        <TextInput
-          style={styles.searchInput}
-          value={searchTerm}
-          onChangeText={setSearchTerm}
-          placeholder="Search for a service..."
-          placeholderTextColor="#999"
-          autoCorrect={false}
-        />
+        <SearchInput value={searchTerm} onChangeText={setSearchTerm} />
       </View>
     </>
   );
@@ -87,6 +71,7 @@ export default function HomeScreen({
               rating={item.rating}
               isFavorite={isFavorite(item.id)}
               onToggleFavorite={toggleFavorite}
+              onPress={(id) => router.push(`/providers/${id}`)}
             />
           </View>
         )}
@@ -103,27 +88,22 @@ const styles = StyleSheet.create({
   list: {
     flex: 1,
   },
-  section: {
-    padding: spacing.lg,
-  },
   providersHeader: {
     paddingHorizontal: spacing.lg,
     paddingTop: spacing.lg,
+  },
+  providersTitleRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  browseAll: {
+    color: '#007AFF',
   },
   cardWrapper: {
     paddingHorizontal: spacing.lg,
   },
   sectionTitle: {
     marginBottom: spacing.md,
-  },
-  searchInput: {
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 8,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    marginBottom: spacing.md,
-    fontSize: 16,
-    backgroundColor: '#fff',
   },
 });

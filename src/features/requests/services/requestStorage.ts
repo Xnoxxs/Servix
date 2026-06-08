@@ -1,13 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import type { ServiceRequest } from '../types/ServiceRequest';
 
 const REQUESTS_KEY = 'serviceRequests';
-
-export type ServiceRequest = {
-  id: string;
-  serviceType: string;
-  location: string;
-  description: string;
-};
 
 // Reads submitted service requests from AsyncStorage.
 // Returns an empty array if nothing is stored yet or if reading fails.

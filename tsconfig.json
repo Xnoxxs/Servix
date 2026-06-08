@@ -5,8 +5,8 @@
     "types": ["jest"],
     "paths": {
       "#features/*": ["./src/features/*"],
-      "#shared/*": ["./src/shared/*"],
-      "#navigation/*": ["./src/navigation/*"]
+      "#shared/*": ["./src/shared/*"]
     }
-  }
+  },
+  "include": ["**/*.ts", "**/*.tsx"]
 }

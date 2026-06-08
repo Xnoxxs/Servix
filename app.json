@@ -2,6 +2,7 @@
   "expo": {
     "name": "Servix",
     "slug": "Servix",
+    "scheme": "servix",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,7 +22,8 @@
           "locationWhenInUsePermission": "Allow Servix to use your location to show nearby providers."
         }
       ],
-      "expo-status-bar"
+      "expo-status-bar",
+      "expo-router"
     ],
     "ios": {
       "supportsTablet": true

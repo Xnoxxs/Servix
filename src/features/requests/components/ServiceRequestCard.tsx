@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import { Typography } from '#shared/elements';
 import { colors, spacing } from '#shared/foundations';
-import type { ServiceRequest } from '../services/requestStorage';
+import type { ServiceRequest } from '../types/ServiceRequest';
 
 type ServiceRequestCardProps = {
   request: ServiceRequest;

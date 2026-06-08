@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
-import {
-  addRequest,
-  getRequests,
-  ServiceRequest,
-} from '../services/requestStorage';
+import { addRequest, getRequests } from '../services/requestStorage';
+import type { ServiceRequest } from '../types/ServiceRequest';
 
 type CreateRequestInput = {
   serviceType: string;
